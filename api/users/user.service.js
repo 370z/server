@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
   create: (data, callBack) => {
     pool.query(
-      `insert into products(userName, password, email, status_level) 
+      `insert into auth(userName, password, email, status_level) 
                 values(?,?,?,?)`,
       [
         data.userName,
@@ -21,7 +21,7 @@ module.exports = {
   },
   getUserByUserEmail: (email, callBack) => {
     pool.query(
-      `select * from products where email = ?`,
+      `select * from auth where email = ?`,
       [email],
       (error, results, fields) => {
         if (error) {
@@ -33,7 +33,7 @@ module.exports = {
   },
   getUserByUserId: (id, callBack) => {
     pool.query(
-      `select id,userName,password,email,status_level from products where id = ?`,
+      `select id,userName,password,email,status_level from auth where id = ?`,
       [id],
       (error, results, fields) => {
         if (error) {
@@ -45,7 +45,7 @@ module.exports = {
   },
   getUsers: callBack => {
     pool.query(
-      `select id,userName,password,email,status_level from products`,
+      `select id,userName,password,email,status_level from auth`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -57,7 +57,7 @@ module.exports = {
   },
   updateUser: (data, callBack) => {
     pool.query(
-      `update products set userName=?, password=?, email=?, status_level=? where id = ?`,
+      `update auth set userName=?, password=?, email=?, status_level=? where id = ?`,
       [
         data.userName,
         data.password,
@@ -75,7 +75,7 @@ module.exports = {
   },
   deleteUser: (data, callBack) => {
     pool.query(
-      `delete from products where id = ?`,
+      `delete from auth where id = ?`,
       [data.id],
       (error, results, fields) => {
         if (error) {
